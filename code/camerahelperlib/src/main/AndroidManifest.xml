@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bingor.camerahelperlib">
+
+    <application>
+        <activity android:name=".CameraActivity21" />
+        <activity android:name=".CameraActivity20" />
+    </application>
+</manifest>
