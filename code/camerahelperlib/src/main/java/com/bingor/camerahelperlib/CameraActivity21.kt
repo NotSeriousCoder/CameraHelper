@@ -51,6 +51,9 @@ class CameraActivity21 : Activity() {
                  */
                 for (opFormat: Int in map.outputFormats) {
                     Log.d("HXB", "opFormat==" + opFormat)
+                    // 检查闪光灯是否支持。
+                    var available = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE) as Boolean
+                    Log.d("HXB", "支持闪光灯==" + available)
                     /**
                      * 不同的输出格式会对应不同支持的输出分辨率
                      */
@@ -71,8 +74,6 @@ class CameraActivity21 : Activity() {
 //            for (String cameraId : manager.getCameraIdList()) {
 
 
-//                // 检查闪光灯是否支持。
-//                Boolean available = characteristics . get (CameraCharacteristics.FLASH_INFO_AVAILABLE);
 //                mFlashSupported = available == null ? false : available;
 //                mCameraId = cameraId;
 //                Log.e(TAG, " 相机可用 ");
