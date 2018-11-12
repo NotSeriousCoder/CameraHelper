@@ -11,6 +11,7 @@ import android.os.Handler
 import android.os.Message
 import android.util.Log
 import android.util.Size
+import android.view.SurfaceHolder
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import java.util.*
@@ -21,6 +22,12 @@ import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class CameraHelper21 : CameraHelper {
+    //摄像头管理
+    var manager: CameraManager
+    //摄像头实例
+    var cameraDevice: CameraDevice? = null
+
+    var surfaceHolder:SurfaceHolder?=null
 
     constructor(context: Context) : super(context) {
         manager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
@@ -60,20 +67,7 @@ class CameraHelper21 : CameraHelper {
         } else {
             try {
                 //打开相机预览
-                manager.openCamera(cameraId,
-                        object : CameraDevice.StateCallback() {
-                            override fun onOpened(camera: CameraDevice?) {
-                                Log.d("HXB", "onOpened===========")
-                            }
-
-                            override fun onDisconnected(camera: CameraDevice?) {
-                                Log.d("HXB", "onDisconnected===========")
-                            }
-
-                            override fun onError(camera: CameraDevice?, error: Int) {
-                                Log.d("HXB", "onError===========")
-                            }
-                        },
+                manager.openCamera(cameraId, CameraStateCallBack(),
                         object : Handler() {
                             override fun handleMessage(msg: Message?) {
                                 super.handleMessage(msg)
@@ -93,14 +87,17 @@ class CameraHelper21 : CameraHelper {
     /**
      * 为相机预览创建新的CameraCaptureSession
      */
-    private fun createCameraPreviewSession(camera: CameraDevice) {
-        //设置了一个具有输出Surface的CaptureRequest.Builder。
-        var previewRequestBuilder = camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+    private fun createCameraPreviewSession() {
+        var builder = cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+        builder?.addTarget(surfaceHolder?.getSurface())
+
+        Arrays.asList(surfaceHolder?.getSurface())
+        cameraDevice?.createCaptureSession(,)
+
 
         try {
-            mPreviewRequestBuilder.addTarget(mSurfaceHolder.getSurface());
             //创建一个CameraCaptureSession来进行相机预览。
-            mCameraDevice.createCaptureSession(Arrays.asList(mSurfaceHolder.getSurface()),
+            mCameraDevice.createCaptureSession(,
                     new CameraCaptureSession . StateCallback () {
 
                         @Override
@@ -140,5 +137,21 @@ class CameraHelper21 : CameraHelper {
         }
     }
 
+
+    inner class CameraStateCallBack : CameraDevice.StateCallback() {
+        override fun onOpened(camera: CameraDevice) {
+            cameraDevice = camera
+        }
+
+        override fun onDisconnected(camera: CameraDevice) {
+            camera.close()
+            cameraDevice = null
+        }
+
+        override fun onError(camera: CameraDevice, error: Int) {
+            camera.close()
+            cameraDevice = null
+        }
+    }
 
 }
