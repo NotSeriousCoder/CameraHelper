@@ -1,6 +1,7 @@
 package com.bingor.camerahelperlib.helper
 
 import android.content.Context
+import android.util.Size
 
 /**
  * Created by HXB on 2018/10/26.
@@ -8,10 +9,16 @@ import android.content.Context
 abstract class CameraHelper {
     protected var context: Context
     protected var cameraId = "-1";
+    //预览宽高（横屏下）
+    var previewSize: Size? = null
+    //实际预览宽高（横屏下）
+    var actualSize: Size? = null
+
 
     constructor(context: Context) {
         this.context = context
     }
 
-    open abstract fun openCamera(facing: Int, imageFormat: Int, pixelFormat: Int)
+    open abstract fun openCamera(facing: Int, format: Int)
+
 }
