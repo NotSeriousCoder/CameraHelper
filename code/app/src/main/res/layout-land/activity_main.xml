@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,40 +27,34 @@
         android:layout_marginLeft="180dp"
         android:background="@android:color/holo_red_dark" />
 
+
     <FrameLayout
         android:id="@+id/control"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:background="#30000000"
-        android:paddingTop="30dp"
-        android:paddingBottom="18dp">
+        android:layout_toRightOf="@id/texture"
+        android:background="#aa4414"
+        android:orientation="horizontal">
 
-        <com.bingor.camerahelperlib.view.ClickRollView
-            android:id="@+id/crv_image_ratio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
-            app:textColor="@android:color/white"
-            app:textSize="18sp" />
-
-
-        <ImageView
+        <Button
             android:id="@+id/picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_take_photo" />
+            android:text="拍照" />
 
         <ImageButton
             android:id="@+id/info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
+            android:layout_gravity="center_horizontal|bottom"
             android:contentDescription="信息"
             android:padding="20dp"
             android:src="@drawable/ic_action_info" />
+
 
     </FrameLayout>
 

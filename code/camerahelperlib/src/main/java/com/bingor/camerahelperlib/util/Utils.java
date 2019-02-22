@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 /**
  * Created by HXB on 2018/11/13.
+ * {@Link android.graphics.ImageFormat}
  */
 public class Utils {
 }

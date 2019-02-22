@@ -23,7 +23,6 @@ class CameraActivity21 : Activity() {
         var manager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
         //获取可用摄像头列表
         for (cameraId: String in manager.getCameraIdList()) {
-            Log.d("HXB", "cameraId==" + cameraId);
             //获取相机的相关参数
             var characteristics = manager.getCameraCharacteristics(cameraId)
             // 摄像头类型
@@ -50,21 +49,15 @@ class CameraActivity21 : Activity() {
                  * PixelFormat
                  */
                 for (opFormat: Int in map.outputFormats) {
-                    Log.d("HXB", "opFormat==" + opFormat)
                     // 检查闪光灯是否支持。
                     var available = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE) as Boolean
-                    Log.d("HXB", "支持闪光灯==" + available)
                     /**
                      * 不同的输出格式会对应不同支持的输出分辨率
                      */
-                    for (size: Size in map.getOutputSizes(opFormat)) {
-                        Log.d("HXB", "size==" + size.toString());
-                    }
-                    Log.d("HXB", "===============================")
+//                    for (size: Size in map.getOutputSizes(opFormat)) {
+//                        Log.d("HXB", "size==" + size.toString());
+//                    }
                 }
-
-                Log.d("HXB", "===============================")
-
             }
 
         }
